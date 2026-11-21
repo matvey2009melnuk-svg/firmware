@@ -12,6 +12,10 @@
 #endif
 #include <globals.h>
 
+#if defined(HAS_AIR_MOUSE)
+#include "modules/others/air_mouse.h"
+#endif
+
 void BleMenu::optionsMenu() {
     options.clear();
 #if !defined(LITE_VERSION)
@@ -39,6 +43,9 @@ void BleMenu::optionsMenu() {
     options.push_back({"BLE Suite", [=]() { BleSuiteMenu(); }});
     options.push_back({"Ninebot", [=]() { BLENinebot(); }});
     options.push_back({"Presenter mode", [=]() { PresenterMode(hid_ble, true); }});
+    #if defined(HAS_AIR_MOUSE)
+    options.push_back({"Air Mouse", [=]() { airMouseMode(); }});
+#endif
 #else
     options.push_back({"BLE Sniffer", [=]() { BLE_SnifferMenu(); }});
 #endif
